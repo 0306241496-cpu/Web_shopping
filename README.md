@@ -2,9 +2,9 @@
 
 ## Đồ án học tập
 
-- **Tác giả:** Trịnh Văn Vũ Khoa
+- **Tác giả:** Lê Đức Tiến 
 - **Lớp:** CĐ CNTT 24WEBD
-- **Mã sinh viên:** 0306241458
+- **Mã sinh viên:** 0306241496
 
 ## Công nghệ và yêu cầu phiên bản
 
