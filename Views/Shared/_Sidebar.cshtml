@@ -1,0 +1,61 @@
+@{
+    // _Sidebar is rendered by _Layout (OUTSIDE #wrapper, same as the Karl template),
+    // so the categories have to come from ViewBag which the controller passes down.
+    // Pages that do not set ViewBag.Categories (Cart, Checkout) fall back to a plain Shop link.
+    var categories = ViewBag.Categories as IEnumerable<Category> ?? Enumerable.Empty<Category>();
+    var currentCategoryId = ViewBag.CurrentCategoryId as int?;
+    var currentProductId = (ViewBag.Product as Product)?.ProductId;
+}
+<div class="catagories-side-menu">
+    <!-- Close Icon -->
+    <div id="sideMenuClose">
+        <i class="ti-close"></i>
+    </div>
+    <!--  Side Nav  -->
+    <div class="nav-side-menu">
+        <div class="menu-list">
+            <h6>Categories</h6>
+            <ul id="menu-content" class="menu-content collapse out">
+                @if (categories.Any())
+                {
+                    var first = true;
+                    foreach (var cat in categories)
+                    {
+                        // unique collapse target id, even when the name has accents/spaces
+                        var target = $"side-cat-{cat.CategoryId}";
+                        // The category being viewed opens by default, the rest stay closed.
+                        var isOpen = cat.CategoryId == currentCategoryId || (currentCategoryId == null && first);
+                        var state = isOpen ? "collapsed active" : "collapsed";
+                        first = false;
+
+                        <li data-toggle="collapse" data-target="@target" class="@state">
+                            <a asp-controller="Product" asp-action="Shop" asp-route-categoryId="@cat.CategoryId">
+                                @cat.CategoryName <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu collapse @(isOpen ? "show" : "")" id="@target">
+                                @* Products of the category, taken from ViewBag.Products when on the shop page *@
+                                <li>
+                                    <a asp-controller="Product" asp-action="Shop" asp-route-categoryId="@cat.CategoryId">
+                                        View All @cat.CategoryName
+                                    </a>
+                                </li>
+                                @if (currentProductId.HasValue)
+                                {
+                                    <li>
+                                        <a asp-controller="Product" asp-action="ProductDetails" asp-route-id="@currentProductId.Value">
+                                            Current Product
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li><a asp-controller="Product" asp-action="Shop">Shop</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

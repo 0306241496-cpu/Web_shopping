@@ -1,0 +1,111 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">WebsiteShopping</a>
+    </div>
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+
+    <ul class="nav navbar-nav navbar-left navbar-top-links">
+        <li><a asp-area="" asp-controller="Product" asp-action="Index"><i class="fa fa-home fa-fw"></i> Website</a></li>
+    </ul>
+
+    <ul class="nav navbar-right navbar-top-links">
+        <li class="dropdown navbar-inverse">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-comment fa-fw"></i> New Comment
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                            <span class="pull-right text-muted small">12 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-envelope fa-fw"></i> Message Sent
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-tasks fa-fw"></i> New Task
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a class="text-center" href="#">
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i> @(User.Identity?.Name ?? "Admin") <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a asp-area="Admin" asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
+            </ul>
+        </li>
+    </ul>
+    <!-- /.navbar-top-links -->
+</nav>
+<aside class="sidebar navbar-default" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+                <!-- /input-group -->
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Product" ? "active" : "")">
+                <a asp-area="Admin" asp-controller="Product" asp-action="Index"><i class="fa fa-cube fa-fw"></i> Sản phẩm</a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Controller"]?.ToString() == "Category" ? "active" : "")">
+                <a asp-area="Admin" asp-controller="Category" asp-action="Index"><i class="fa fa-tags fa-fw"></i> Danh mục</a>
+            </li>
+            <li>
+                <a asp-area="Admin" asp-controller="Order" asp-action="Index"><i class="fa fa-shopping-cart fa-fw"></i> Đơn hàng</a>
+            </li>
+        </ul>
+    </div>
+</aside>
